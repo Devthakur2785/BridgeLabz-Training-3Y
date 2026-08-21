@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My City on Google Maps</title>
+</head>
+<body>
+    <h1>Location of My City</h1>
+
+    <!--
+        The "loading" attribute is set to "lazy".
+        This tells the browser to delay loading the iframe's content
+        (the map) until it is about to become visible in the viewport.
+        This improves page load speed and saves bandwidth, since the
+        map is only fetched when the user scrolls near it.
+    -->
+    <iframe
+        title="Google Map showing my city"
+        src="https://www.google.com/maps?q=Mathura,Uttar%20Pradesh,India&output=embed"
+        width="90%"
+        height="450"
+        loading="lazy"
+        style="border:0;"
+        allowfullscreen>
+    </iframe>
+</body>
+</html>
