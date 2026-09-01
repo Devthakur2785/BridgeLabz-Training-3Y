@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Jaipur</title>
+
+    <style>
+        /* Basic styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #222;
+            background-color: #f5f5f5;
+        }
+
+        /* Header */
+        header {
+            background-color: #7c2d12;
+            color: white;
+            padding: 20px 8%;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Navigation */
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Every main section takes the full width */
+        main section {
+            width: 100%;
+            min-height: 80vh;
+            padding: 80px 10%;
+            border-bottom: 5px solid white;
+        }
+
+        /* Section 1 - Linear Gradient */
+        #home {
+            background: linear-gradient(135deg, #fed7aa, #fb923c, #c2410c);
+            color: #431407;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #home h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        #home p {
+            max-width: 750px;
+            font-size: 1.25em;
+            line-height: 1.8;
+            padding: 20px;
+            border: 2px solid #7c2d12;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.35);
+        }
+
+        /* Section 2 - Radial Gradient */
+        #places {
+            background: radial-gradient(circle, #fef3c7, #fbbf24, #92400e);
+            color: #422006;
+        }
+
+        #places h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .place-box {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 25px;
+            border: 3px solid #78350f;
+            border-radius: 12px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .place-box h3 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .place-box p {
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        /* Section 3 - Fixed background effect */
+        #culture {
+            background-color: #1e3a8a;
+            background-image:
+                linear-gradient(rgba(30, 58, 138, 0.82), rgba(30, 58, 138, 0.82)),
+                url("https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+
+        #culture h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+        }
+
+        #culture p {
+            max-width: 800px;
+            font-size: 1.2em;
+            line-height: 1.8;
+            padding: 25px;
+            border: 2px solid white;
+            background-color: rgba(0, 0, 0, 0.25);
+        }
+
+        /* Section 4 - Second fixed background effect */
+        #food {
+            background-color: #14532d;
+            background-image:
+                linear-gradient(rgba(20, 83, 45, 0.78), rgba(20, 83, 45, 0.78)),
+                url("https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+        }
+
+        #food h2 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        #food p {
+            max-width: 750px;
+            margin: auto;
+            font-size: 1.15em;
+            line-height: 1.8;
+            padding: 25px;
+            border: 2px solid white;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111827;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        footer p {
+            font-size: 1rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 700px) {
+            header h1 {
+                font-size: 1.7rem;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 5px 8px;
+            }
+
+            main section {
+                padding: 60px 7%;
+            }
+
+            #home h2 {
+                font-size: 2.2rem;
+            }
+
+            #places h2,
+            #culture h2,
+            #food h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Explore Jaipur</h1>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#places">Places</a>
+            <a href="#culture">Culture</a>
+            <a href="#food">Food</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section id="home">
+            <h2>The Pink City</h2>
+            <p>
+                Jaipur is the capital of Rajasthan and is popularly known as
+                the Pink City. It is famous for its beautiful palaces, forts,
+                colorful markets, rich history, and traditional culture.
+            </p>
+        </section>
+
+        <section id="places">
+            <h2>Famous Places to Visit</h2>
+
+            <div class="place-box">
+                <h3>Amber Fort</h3>
+                <p>
+                    Amber Fort is a magnificent historic fort known for its
+                    architecture, courtyards, and beautiful views of the hills.
+                </p>
+            </div>
+
+            <div class="place-box">
+                <h3>Hawa Mahal</h3>
+                <p>
+                    Hawa Mahal is one of Jaipur's most recognizable landmarks.
+                    Its many windows were designed to allow cool air to flow
+                    through the building.
+                </p>
+            </div>
+
+            <div class="place-box">
+                <h3>City Palace</h3>
+                <p>
+                    The City Palace is a grand complex containing courtyards,
+                    museums, royal buildings, and impressive Rajasthani artwork.
+                </p>
+            </div>
+        </section>
+
+        <section id="culture">
+            <h2>Culture of Jaipur</h2>
+            <p>
+                Jaipur has a vibrant cultural heritage. Traditional handicrafts,
+                folk music, dance, festivals, colorful clothing, and local
+                artwork are important parts of the city's identity. The city
+                combines royal history with modern life.
+            </p>
+        </section>
+
+        <section id="food">
+            <h2>Traditional Rajasthani Food</h2>
+            <p>
+                Jaipur is also famous for its delicious Rajasthani cuisine.
+                Popular dishes include Dal Baati Churma, Gatte ki Sabzi,
+                Ker Sangri, and traditional sweets. Local markets and restaurants
+                offer many opportunities to experience authentic flavors.
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Explore Jaipur | Assignment 5 - Question 2</p>
+    </footer>
+
+</body>
+</html>

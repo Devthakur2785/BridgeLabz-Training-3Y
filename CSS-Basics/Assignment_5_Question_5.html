@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Plans</title>
+
+    <style>
+        /* Basic page styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f5f9;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 45px 20px 25px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #64748b;
+        }
+
+        /* Three equal columns using CSS Grid */
+        .pricing-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1100px;
+            margin: 30px auto 60px;
+            padding: 0 25px;
+            align-items: stretch;
+        }
+
+        /* Each pricing box has equal height */
+        .plan {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 480px;
+            padding: 35px 25px;
+            border: 2px solid #cbd5e1;
+            border-radius: 15px;
+            background-color: white;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+
+            /* Makes the hover effect smooth */
+            transition: transform 0.3s ease, background-color 0.3s ease,
+                        box-shadow 0.3s ease;
+        }
+
+        /* Hover effect: box grows slightly and changes background */
+        .plan:hover {
+            transform: scale(1.04);
+            background-color: #eff6ff;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
+        }
+
+        .plan h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .price {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #2563eb;
+            margin-bottom: 25px;
+        }
+
+        .price span {
+            font-size: 0.9rem;
+            font-weight: normal;
+            color: #64748b;
+        }
+
+        .features {
+            list-style: none;
+            text-align: left;
+            line-height: 2;
+            margin-bottom: 30px;
+        }
+
+        /* Pushes the button to the bottom of every card */
+        .button-area {
+            margin-top: auto;
+        }
+
+        .button {
+            display: inline-block;
+            width: 100%;
+            padding: 13px;
+            border-radius: 7px;
+            background-color: #2563eb;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Highlight the most popular plan */
+        .popular {
+            border: 4px solid #f59e0b;
+            border-style: solid;
+            position: relative;
+        }
+
+        .popular-label {
+            display: inline-block;
+            background-color: #f59e0b;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .popular .price {
+            color: #d97706;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1e293b;
+            color: white;
+        }
+
+        /* Responsive: three columns become one column on small screens */
+        @media (max-width: 700px) {
+            .pricing-container {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+
+            .plan {
+                min-height: 430px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Choose Your Plan</h1>
+        <p>Select the plan that works best for you.</p>
+    </header>
+
+    <main class="pricing-container">
+
+        <!-- Basic Plan -->
+        <section class="plan">
+            <h2>Basic</h2>
+
+            <div class="price">
+                ₹199 <span>/month</span>
+            </div>
+
+            <ul class="features">
+                <li>✓ 5 Projects</li>
+                <li>✓ 5 GB Storage</li>
+                <li>✓ Basic Support</li>
+                <li>✓ Community Access</li>
+            </ul>
+
+            <div class="button-area">
+                <a href="#" class="button">Choose Basic</a>
+            </div>
+        </section>
+
+        <!-- Standard Plan - Most Popular -->
+        <section class="plan popular">
+            <div class="popular-label">MOST POPULAR</div>
+
+            <h2>Standard</h2>
+
+            <div class="price">
+                ₹499 <span>/month</span>
+            </div>
+
+            <ul class="features">
+                <li>✓ 15 Projects</li>
+                <li>✓ 25 GB Storage</li>
+                <li>✓ Priority Support</li>
+                <li>✓ Advanced Features</li>
+            </ul>
+
+            <div class="button-area">
+                <a href="#" class="button">Choose Standard</a>
+            </div>
+        </section>
+
+        <!-- Premium Plan -->
+        <section class="plan">
+            <h2>Premium</h2>
+
+            <div class="price">
+                ₹999 <span>/month</span>
+            </div>
+
+            <ul class="features">
+                <li>✓ Unlimited Projects</li>
+                <li>✓ 100 GB Storage</li>
+                <li>✓ 24/7 Support</li>
+                <li>✓ All Premium Features</li>
+            </ul>
+
+            <div class="button-area">
+                <a href="#" class="button">Choose Premium</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Pricing Plans | Assignment 5 - Question 5</p>
+    </footer>
+
+</body>
+</html>
