@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Webpage</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            background: #f2f2f2;
+        }
+
+        /* Header using Flexbox */
+        header {
+            background: #222;
+            color: white;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Main uses Grid */
+        main {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+            padding: 40px 8%;
+        }
+
+        article,
+        aside {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        article h1 {
+            margin-bottom: 25px;
+            animation: moveUp 1s ease;
+        }
+
+        /* Three boxes inside article using Flexbox */
+        .boxes {
+            display: flex;
+            gap: 15px;
+        }
+
+        .box {
+            flex: 1;
+            min-height: 150px;
+            background: #e5e5e5;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        aside h2 {
+            margin-bottom: 15px;
+        }
+
+        aside p {
+            line-height: 1.6;
+        }
+
+        footer {
+            width: 100%;
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 18px;
+        }
+
+        @keyframes moveUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            main {
+                grid-template-columns: 1fr;
+                padding: 25px 5%;
+            }
+
+            .boxes {
+                flex-direction: column;
+            }
+
+            .box {
+                min-height: 120px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>My Website</h1>
+
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <article>
+            <h1>Welcome to My Website</h1>
+
+            <div class="boxes">
+                <div class="box">
+                    <h2>Article 1</h2>
+                </div>
+
+                <div class="box">
+                    <h2>Article 2</h2>
+                </div>
+
+                <div class="box">
+                    <h2>Article 3</h2>
+                </div>
+            </div>
+        </article>
+
+        <aside>
+            <h2>Sidebar</h2>
+            <p>
+                This is the sidebar area. It contains additional information,
+                useful links, or other content.
+            </p>
+        </aside>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 My Website. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

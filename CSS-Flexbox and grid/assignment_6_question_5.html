@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Section</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .pricing {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .card {
+            flex: 1;
+            background: white;
+            padding: 35px 25px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 1s ease;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card h2 {
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .card p {
+            margin-bottom: 10px;
+        }
+
+        /* Middle card is larger and highlighted */
+        .featured {
+            transform: scale(1.08);
+            background: #dceeff;
+        }
+
+        .featured:hover {
+            transform: scale(1.08) translateY(-10px);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Stack cards vertically below 750px */
+        @media (max-width: 750px) {
+            body {
+                padding: 30px 20px;
+            }
+
+            .pricing {
+                flex-direction: column;
+            }
+
+            .card {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .featured {
+                transform: scale(1);
+            }
+
+            .featured:hover {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="pricing">
+
+        <div class="card">
+            <h2>Basic</h2>
+            <div class="price">₹499</div>
+            <p>1 User</p>
+            <p>5 GB Storage</p>
+            <p>Email Support</p>
+        </div>
+
+        <div class="card featured">
+            <h2>Pro</h2>
+            <div class="price">₹999</div>
+            <p>5 Users</p>
+            <p>50 GB Storage</p>
+            <p>Priority Support</p>
+        </div>
+
+        <div class="card">
+            <h2>Premium</h2>
+            <div class="price">₹1,499</div>
+            <p>10 Users</p>
+            <p>100 GB Storage</p>
+            <p>24/7 Support</p>
+        </div>
+
+    </section>
+
+</body>
+</html>

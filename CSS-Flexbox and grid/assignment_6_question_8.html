@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        figure {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        figure img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        figure img:hover {
+            transform: scale(1.05);
+        }
+
+        figcaption {
+            padding: 12px 5px 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>My Photo Gallery</h1>
+
+    <div class="gallery">
+
+        <figure>
+            <img src="https://picsum.photos/id/1015/600/400" alt="Mountain">
+            <figcaption>Beautiful Mountain</figcaption>
+        </figure>
+
+        <figure>
+            <img src="https://picsum.photos/id/1016/600/400" alt="Nature">
+            <figcaption>Peaceful Nature</figcaption>
+        </figure>
+
+        <figure>
+            <img src="https://picsum.photos/id/1025/600/400" alt="Dog">
+            <figcaption>Cute Dog</figcaption>
+        </figure>
+
+        <figure>
+            <img src="https://picsum.photos/id/1035/600/400" alt="River">
+            <figcaption>Calm River</figcaption>
+        </figure>
+
+        <figure>
+            <img src="https://picsum.photos/id/1043/600/400" alt="Forest">
+            <figcaption>Green Forest</figcaption>
+        </figure>
+
+        <figure>
+            <img src="https://picsum.photos/id/106/600/400" alt="Lake">
+            <figcaption>Beautiful Lake</figcaption>
+        </figure>
+
+    </div>
+
+</body>
+</html>

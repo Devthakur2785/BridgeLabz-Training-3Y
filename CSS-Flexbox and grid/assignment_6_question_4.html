@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            grid-template-rows: 70px 1fr;
+            gap: 15px;
+            background: #f2f2f2;
+        }
+
+        /* Header */
+        header {
+            grid-column: 1 / -1;
+            background: #222;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 0 25px;
+        }
+
+        header h1 {
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Sidebar */
+        aside {
+            background: #333;
+            padding: 25px 15px;
+        }
+
+        aside nav {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        aside a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+        }
+
+        /* Main content */
+        main {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 20px;
+            padding: 10px 20px 20px 5px;
+        }
+
+        .box {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+        }
+
+        /* One box spans two columns */
+        .box-wide {
+            grid-column: span 2;
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+            body {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            header {
+                min-height: 70px;
+            }
+
+            aside {
+                padding: 15px;
+            }
+
+            aside nav {
+                flex-direction: row;
+                justify-content: space-around;
+                flex-wrap: wrap;
+            }
+
+            main {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                padding: 10px;
+            }
+
+            .box-wide {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>My Dashboard</h1>
+    </header>
+
+    <aside>
+        <nav>
+            <a href="#">Dashboard</a>
+            <a href="#">Profile</a>
+            <a href="#">Settings</a>
+            <a href="#">Logout</a>
+        </nav>
+    </aside>
+
+    <main>
+        <div class="box box-wide">
+            <h2>Overview</h2>
+        </div>
+
+        <div class="box">
+            <h2>Statistics</h2>
+        </div>
+
+        <div class="box">
+            <h2>Recent Activity</h2>
+        </div>
+
+        <div class="box">
+            <h2>Notifications</h2>
+        </div>
+    </main>
+
+</body>
+</html>

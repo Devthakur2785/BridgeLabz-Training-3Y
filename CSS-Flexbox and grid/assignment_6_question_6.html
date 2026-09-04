@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            grid-template-rows: auto 1fr auto;
+            grid-template-areas:
+                "header header"
+                "sidebar main"
+                "footer footer";
+            gap: 20px;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        header {
+            grid-area: header;
+            background: #222;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        aside {
+            grid-area: sidebar;
+            background: white;
+            padding: 20px;
+        }
+
+        aside h3 {
+            margin-bottom: 15px;
+        }
+
+        aside ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        main {
+            grid-area: main;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .post {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .post h2 {
+            margin-bottom: 15px;
+        }
+
+        .post p {
+            line-height: 1.6;
+        }
+
+        footer {
+            grid-area: footer;
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        @media (max-width: 800px) {
+            body {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto 1fr auto;
+                grid-template-areas:
+                    "header"
+                    "main"
+                    "sidebar"
+                    "footer";
+            }
+
+            header {
+                flex-direction: column;
+            }
+
+            main {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 550px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>My Blog</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Blog</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <aside>
+        <h3>Categories</h3>
+        <ul>
+            <li>Technology</li>
+            <li>Programming</li>
+            <li>Web Design</li>
+            <li>Education</li>
+        </ul>
+    </aside>
+
+    <main>
+        <article class="post">
+            <h2>Learning HTML & CSS</h2>
+            <p>HTML creates the structure of a webpage while CSS is used to style and design it.</p>
+        </article>
+
+        <article class="post">
+            <h2>Why Learn CSS Grid?</h2>
+            <p>CSS Grid makes it easy to create clean, responsive layouts with rows and columns.</p>
+        </article>
+    </main>
+
+    <footer>
+        <p>Contact: dev@example.com | &copy; 2026 My Blog</p>
+    </footer>
+
+</body>
+</html>
