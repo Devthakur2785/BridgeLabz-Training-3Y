@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced CSS Selectors</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Advanced CSS Selectors</h1>
+    </header>
+
+    <main>
+
+        <section class="content">
+
+            <h2>My Skills</h2>
+
+            <ul class="skills">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>Java</li>
+                <li>SQL</li>
+                <li>DSA</li>
+            </ul>
+
+            <h2>Form</h2>
+
+            <form>
+                <input type="text" placeholder="Enter your name">
+
+                <input type="email" placeholder="Enter your email">
+
+                <button type="submit">Submit</button>
+            </form>
+
+            <h2>Useful Links</h2>
+
+            <div class="links">
+                <a href="https://github.com">GitHub</a>
+                <a href="https://leetcode.com">LeetCode</a>
+                <a href="about.html">About</a>
+            </div>
+
+            <div class="combinators">
+
+                <p>Paragraph inside the container.</p>
+
+                <div>
+                    <p>Paragraph inside div.</p>
+                </div>
+
+                <p>Another paragraph.</p>
+
+                <p>Last paragraph.</p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Advanced Selectors Practice</p>
+    </footer>
+
+</body>
+</html>
