@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Selectors Practice</title>
+    <link rel="stylesheet" href="Q4-css-selectors.css">
+</head>
+<body>
+
+    <header>
+        <h1>CSS Selectors Practice</h1>
+        <p>Different types of CSS selectors</p>
+    </header>
+
+    <main>
+
+        <!-- Element Selector -->
+        <section>
+            <h2>Element Selector</h2>
+            <p>This paragraph is styled using an element selector.</p>
+            <p>All paragraph elements receive the same basic style.</p>
+        </section>
+
+        <!-- Class Selector -->
+        <section>
+            <h2>Class Selector</h2>
+            <p class="highlight">
+                This paragraph uses a class selector.
+            </p>
+        </section>
+
+        <!-- ID Selector -->
+        <section>
+            <h2>ID Selector</h2>
+            <p id="special-text">
+                This paragraph is styled using an ID selector.
+            </p>
+        </section>
+
+        <!-- Attribute Selector -->
+        <section>
+            <h2>Attribute Selector</h2>
+
+            <a href="https://example.com">
+                Normal Link
+            </a>
+
+            <a href="https://google.com">
+                External Link
+            </a>
+        </section>
+
+        <!-- Combinators -->
+        <section class="combinators">
+            <h2>Combinators</h2>
+
+            <div>
+                <p>Descendant paragraph</p>
+
+                <ul>
+                    <li>First List Item</li>
+                    <li>Second List Item</li>
+                    <li>Third List Item</li>
+                </ul>
+
+                <p>Another paragraph</p>
+            </div>
+
+            <p>Paragraph outside the div</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>CSS Selectors Practice Page</p>
+    </footer>
+
+</body>
+</html>

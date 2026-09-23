@@ -1,0 +1,94 @@
+/* Element Selector
+   Styles all paragraph elements */
+p {
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Basic page styling */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* Header styling */
+header {
+    text-align: center;
+    padding: 25px;
+    background-color: #263238;
+    color: white;
+}
+
+/* Main content spacing */
+main {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px;
+}
+
+/* Section styling */
+section {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+/* Class Selector
+   Styles elements having the highlight class */
+.highlight {
+    background-color: #fff3cd;
+    padding: 10px;
+    border-left: 5px solid #ff9800;
+}
+
+/* ID Selector
+   Styles the element having special-text ID */
+#special-text {
+    background-color: #e3f2fd;
+    padding: 10px;
+    font-weight: bold;
+}
+
+/* Attribute Selector
+   Selects links whose href starts with https */
+a[href^="https"] {
+    color: #1976d2;
+    margin-right: 20px;
+}
+
+/* Descendant Combinator
+   Selects paragraphs inside .combinators */
+.combinators div p {
+    background-color: #eeeeee;
+    padding: 8px;
+}
+
+/* Child Combinator >
+   Selects only li elements that are direct children of ul */
+.combinators ul > li {
+    padding: 8px;
+    background-color: #e8f5e9;
+}
+
+/* Adjacent Sibling Combinator +
+   Selects the paragraph immediately after the ul */
+.combinators ul + p {
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+/* General Sibling Combinator ~
+   Selects paragraphs that are siblings after the ul */
+.combinators ul ~ p {
+    border-bottom: 2px solid #1976d2;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #263238;
+    color: white;
+}

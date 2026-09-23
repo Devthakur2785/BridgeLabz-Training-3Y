@@ -1,0 +1,98 @@
+/* Basic page styling */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    color: #222;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 25px;
+    background-color: #263238;
+    color: white;
+}
+
+/* Arrange all examples in one row */
+.examples {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px;
+}
+
+/* Individual example boxes */
+.example {
+    width: 250px;
+    min-height: 300px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.example h2 {
+    margin-top: 0;
+}
+
+/* :hover example */
+.example a {
+    display: inline-block;
+    padding: 10px 15px;
+    color: white;
+    background-color: #1976d2;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.example a:hover {
+    background-color: #e53935;
+}
+
+/* :focus example */
+.example input {
+    padding: 10px;
+    width: 100%;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.example input:focus {
+    border-color: #1976d2;
+    outline: none;
+    background-color: #e3f2fd;
+}
+
+/* :active example */
+.example button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #43a047;
+    color: white;
+    cursor: pointer;
+}
+
+.example button:active {
+    background-color: #1b5e20;
+    transform: scale(0.95);
+}
+
+/* :nth-child() example */
+.example li {
+    list-style: none;
+    padding: 8px;
+    margin: 5px;
+    background-color: #eeeeee;
+}
+
+/* Select every even list item */
+.example li:nth-child(even) {
+    background-color: #90caf9;
+}
