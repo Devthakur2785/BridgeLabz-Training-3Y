@@ -1,0 +1,16 @@
+/* Food image styling */
+.food-image {
+    max-height: 450px;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Table styling */
+.table {
+    background-color: white;
+}
+
+/* Card spacing */
+.card {
+    height: 100%;
+}

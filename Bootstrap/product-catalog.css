@@ -1,0 +1,21 @@
+/* Product image size */
+.product-card img {
+    height: 220px;
+    object-fit: cover;
+}
+
+/* Smooth hover transition */
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Lift card on hover */
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Button transition */
+.product-card .btn {
+    transition: 0.3s ease;
+}

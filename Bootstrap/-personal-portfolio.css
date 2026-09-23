@@ -1,0 +1,16 @@
+/* Profile image size */
+.profile-img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Improve contact form appearance */
+form .form-control {
+    border-radius: 6px;
+}
+
+/* Button transition */
+.btn {
+    transition: 0.3s ease;
+}

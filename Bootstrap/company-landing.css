@@ -1,0 +1,23 @@
+/* Hero section background */
+.hero {
+    background-color: #f4f7fb;
+}
+
+/* Custom minimum height */
+.min-vh-75 {
+    min-height: 75vh;
+}
+
+/* Hero visual box */
+.hero-box {
+    padding: 60px 30px;
+    background-color: #0d6efd;
+    color: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Improve paragraph readability */
+.hero p {
+    max-width: 650px;
+}
