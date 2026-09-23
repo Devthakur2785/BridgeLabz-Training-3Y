@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q2 - Responsive Web Design Layout</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #222;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 8%;
+      background: #243447;
+      color: white;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      gap: 24px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #8dd7ff;
+    }
+
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    main h1 {
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .description {
+      margin-bottom: 36px;
+      text-align: center;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .feature-box {
+      flex: 1;
+      min-width: 0;
+      padding: 32px 22px;
+      text-align: center;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
+      transition: transform 0.3s ease;
+    }
+
+    .feature-box:hover {
+      transform: scale(1.05);
+    }
+
+    .feature-box h2 {
+      margin-bottom: 12px;
+      color: #176b87;
+    }
+
+    .feature-box p {
+      line-height: 1.6;
+      color: #555;
+    }
+
+    footer {
+      padding: 20px;
+      text-align: center;
+      background: #243447;
+      color: white;
+    }
+
+    @media (max-width: 749px) {
+      header {
+        flex-direction: column;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .features {
+        flex-direction: column;
+      }
+
+      .feature-box {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">MyWebsite</div>
+    <nav aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="home">
+    <h1>Welcome to Our Website</h1>
+    <p class="description">A simple responsive homepage layout built with Flexbox.</p>
+
+    <section class="features" id="features">
+      <article class="feature-box">
+        <h2>Feature One</h2>
+        <p>Discover useful tools and resources designed to make your work easier.</p>
+      </article>
+
+      <article class="feature-box">
+        <h2>Feature Two</h2>
+        <p>Enjoy a clean, user-friendly experience across different screen sizes.</p>
+      </article>
+
+      <article class="feature-box">
+        <h2>Feature Three</h2>
+        <p>Stay connected and explore more possibilities with our services.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <p>&copy; 2026 MyWebsite. All rights reserved.</p>
+  </footer>
+</body>
+</html>
