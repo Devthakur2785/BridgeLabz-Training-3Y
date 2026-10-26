@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Assignment 4 Runner</title></head>
+<body>
+<script>
+  // Usage: runner.html?q=q2_student_validator  (loads that .js file)
+  const q = new URLSearchParams(location.search).get("q");
+  if (q) { const s = document.createElement("script"); s.src = q + ".js"; document.body.appendChild(s); }
+  else document.body.innerHTML = "<h3>Browser questions</h3>" +
+    ["q2_student_validator","q4_form_builder","q5_ticket_booking","q7_login_validation","q8_object_updater"]
+    .map(n => `<p><a href="?q=${n}">${n}</a></p>`).join("");
+</script>
+</body></html>
