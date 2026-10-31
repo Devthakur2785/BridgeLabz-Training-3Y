@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Q9 - Form Submit Blocker</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 420px; margin: 40px auto; padding: 0 16px; }
+    .field { margin-bottom: 14px; }
+    label { display: block; font-weight: bold; margin-bottom: 4px; }
+    input { width: 100%; padding: 8px; font-size: 16px; box-sizing: border-box; }
+    input.invalid { border: 2px solid #d64545; }
+    .error { color: #d64545; font-size: 14px; min-height: 18px; margin-top: 4px; }
+    button { padding: 8px 18px; cursor: pointer; }
+    #successMessage { display: none; margin-top: 16px; padding: 12px; background: #eefaf2;
+                      border: 1px solid #2d9d5c; border-radius: 6px; color: #1d6b3d; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h2>Register</h2>
+  <!-- novalidate turns off the browser's own popups so our inline errors are used -->
+  <form id="registerForm" novalidate>
+    <div class="field">
+      <label for="nameInput">Name</label>
+      <input type="text" id="nameInput" name="name">
+      <div class="error" id="nameError"></div>
+    </div>
+    <div class="field">
+      <label for="emailInput">Email</label>
+      <input type="text" id="emailInput" name="email">
+      <div class="error" id="emailError"></div>
+    </div>
+    <div class="field">
+      <label for="passwordInput">Password</label>
+      <input type="password" id="passwordInput" name="password">
+      <div class="error" id="passwordError"></div>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+  <div id="successMessage">Form Submitted Successfully</div>
+  <script>
+// Q9: Form submit blocker with preventDefault() and live errors
+
+const registerForm = document.getElementById("registerForm");
+const successMessage = document.getElementById("successMessage");
+
+// Describe each field once: its input, error box, and rule (returns "" when valid)
+const fields = [
+  {
+    input: document.getElementById("nameInput"),
+    errorBox: document.getElementById("nameError"),
+    validate: (value) => (value.trim() === "" ? "Name is required." : "")
+  },
+  {
+    input: document.getElementById("emailInput"),
+    errorBox: document.getElementById("emailError"),
+    validate: (value) => {
+      if (value.trim() === "") return "Email is required.";
+      if (!value.includes("@")) return "Email must contain @.";
+      return "";
+    }
+  },
+  {
+    input: document.getElementById("passwordInput"),
+    errorBox: document.getElementById("passwordError"),
+    validate: (value) => (value.length < 6 ? "Password must be at least 6 characters." : "")
+  }
+];
+
+// Validate one field and show/hide its inline error. Returns true if valid.
+function validateField(field) {
+  const errorMessage = field.validate(field.input.value);
+  field.errorBox.textContent = errorMessage;
+  field.input.classList.toggle("invalid", errorMessage !== "");
+  return errorMessage === "";
+}
+
+registerForm.addEventListener("submit", (event) => {
+  // Always stop the real browser submission (page reload / navigation)
+  event.preventDefault();
+
+  // Validate EVERY field (map, not some/every) so all errors appear at once
+  const allValid = fields.map(validateField).every(Boolean);
+
+  if (allValid) {
+    successMessage.style.display = "block";
+    registerForm.reset();
+  } else {
+    successMessage.style.display = "none";
+  }
+});
+
+// LIVE ERRORS: re-check a field as the user types.
+// Errors disappear automatically once the value becomes valid.
+fields.forEach((field) => {
+  field.input.addEventListener("input", () => {
+    // Only react if an error is currently showing, so untouched fields stay quiet
+    if (field.errorBox.textContent !== "") validateField(field);
+    successMessage.style.display = "none"; // editing again hides the old success message
+  });
+});
+
+  </script>
+</body>
+</html>

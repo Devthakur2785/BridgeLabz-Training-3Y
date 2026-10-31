@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Q5 - Image Gallery with Modal</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 760px; margin: 30px auto; padding: 0 16px; }
+    #gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+    #gallery img { width: 100%; height: 150px; object-fit: cover; border-radius: 6px; cursor: pointer;
+                   transition: transform 0.2s; background: #ddd; }
+    #gallery img:hover { transform: scale(1.04); }
+
+    /* Full-screen dark overlay: clicking it closes the modal */
+    #modal { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75);
+             justify-content: center; align-items: center; z-index: 10; }
+    #modal.open { display: flex; }
+    .modal-content { background: #fff; padding: 12px; border-radius: 8px; max-width: 90vw; max-height: 90vh; }
+    .modal-content img { display: block; max-width: 100%; max-height: 80vh; }
+    .modal-content p { margin: 8px 0 0; text-align: center; }
+  </style>
+</head>
+<body>
+  <h2>Image Gallery</h2>
+  <div id="gallery"></div>
+
+  <div id="modal">
+    <div class="modal-content">
+      <img id="modalImage" alt="">
+      <p id="modalCaption"></p>
+    </div>
+  </div>
+  <script>
+// Q5: Image gallery with modal preview
+
+const gallery = document.getElementById("gallery");
+const modal = document.getElementById("modal");
+const modalContent = modal.querySelector(".modal-content");
+const modalImage = document.getElementById("modalImage");
+const modalCaption = document.getElementById("modalCaption");
+
+// 6 images: small version for the grid, big version for the modal.
+// (Swap these URLs with your own image files if you like.)
+const images = [1, 2, 3, 4, 5, 6].map((number) => ({
+  title: `Image ${number}`,
+  thumbnail: `https://picsum.photos/seed/gallery${number}/300/200`,
+  large: `https://picsum.photos/seed/gallery${number}/1000/700`
+}));
+
+// Offline fallback: a coloured SVG placeholder so the gallery still works without internet
+function createPlaceholder(label, width, height, hue) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
+    <rect width="100%" height="100%" fill="hsl(${hue}, 60%, 55%)"/>
+    <text x="50%" y="50%" fill="white" font-size="${height / 8}" font-family="Arial"
+      text-anchor="middle" dominant-baseline="middle">${label}</text></svg>`;
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+}
+
+// Build the grid
+images.forEach((imageData, index) => {
+  const thumbnailElement = document.createElement("img");
+  thumbnailElement.src = imageData.thumbnail;
+  thumbnailElement.alt = imageData.title;
+  thumbnailElement.dataset.large = imageData.large;    // remember the big version
+  thumbnailElement.dataset.fallbackHue = String(index * 60);
+  thumbnailElement.addEventListener("error", () => {
+    thumbnailElement.src = createPlaceholder(imageData.title, 300, 200, index * 60);
+  }, { once: true });
+  gallery.appendChild(thumbnailElement);
+});
+
+function openModal(thumbnailElement) {
+  modalImage.alt = thumbnailElement.alt;
+  modalCaption.textContent = thumbnailElement.alt;
+  // If the thumbnail already fell back to a placeholder, use a bigger placeholder too
+  modalImage.onerror = () => {
+    modalImage.onerror = null;
+    modalImage.src = createPlaceholder(thumbnailElement.alt, 800, 560, Number(thumbnailElement.dataset.fallbackHue));
+  };
+  modalImage.src = thumbnailElement.dataset.large;
+  modal.classList.add("open");
+}
+
+function closeModal() {
+  modal.classList.remove("open");
+}
+
+// Event delegation: one listener on the grid handles all images
+gallery.addEventListener("click", (event) => {
+  if (event.target.tagName === "IMG") openModal(event.target);
+});
+
+// Clicking the dark overlay (outside the modal box) closes the modal
+modal.addEventListener("click", closeModal);
+
+// Clicks INSIDE the modal box must not bubble up to the overlay,
+// otherwise the overlay's click handler would close the modal.
+modalContent.addEventListener("click", (event) => {
+  event.stopPropagation();
+});
+
+// Bonus: Escape key also closes
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closeModal();
+});
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Q2 - Live Character Counter</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 480px; margin: 40px auto; padding: 0 16px; }
+    textarea { width: 100%; height: 120px; padding: 8px; font-size: 16px; box-sizing: border-box; }
+    #counter { margin: 8px 0 12px; font-weight: bold; color: green; }
+    #counter.warning { color: #c9a000; }   /* yellow (darker for readability) */
+    #counter.limit { color: red; }
+    button { padding: 8px 16px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h2>Live Character Counter</h2>
+  <textarea id="messageBox" placeholder="Type here (max 100 characters)"></textarea>
+  <div id="counter">100 characters remaining</div>
+  <button id="resetButton">Reset</button>
+  <script>
+// Q2: Live Character Counter with warning behaviour
+
+const MAX_CHARACTERS = 100;
+const WARNING_THRESHOLD = 20;
+
+const messageBox = document.getElementById("messageBox");
+const counter = document.getElementById("counter");
+const resetButton = document.getElementById("resetButton");
+
+// Recalculate the remaining characters and update text + colour
+function updateCounter() {
+  const remaining = MAX_CHARACTERS - messageBox.value.length;
+  counter.textContent = `${remaining} characters remaining`;
+
+  counter.classList.remove("warning", "limit");
+  if (remaining <= 0) {
+    counter.classList.add("limit");          // red at 0
+  } else if (remaining <= WARNING_THRESHOLD) {
+    counter.classList.add("warning");        // yellow at 20 or fewer
+  }
+}
+
+// Keys that never add text and must stay allowed even at the limit
+// (otherwise the user could not delete anything!)
+function isTypingKey(event) {
+  if (event.ctrlKey || event.metaKey || event.altKey) return false; // shortcuts: copy, select all...
+  return event.key.length === 1 || event.key === "Enter"; // letters, digits, symbols, space, newline
+}
+
+// Block typing once the limit is reached using preventDefault()
+messageBox.addEventListener("keydown", (event) => {
+  const remaining = MAX_CHARACTERS - messageBox.value.length;
+  if (remaining <= 0 && isTypingKey(event)) {
+    event.preventDefault();  // cancels the character from being inserted
+  }
+});
+
+// Pasting bypasses keydown, so trim any pasted text that would go over the limit
+messageBox.addEventListener("paste", (event) => {
+  const pastedText = (event.clipboardData || window.clipboardData).getData("text");
+  const spaceLeft = MAX_CHARACTERS - messageBox.value.length
+    + (messageBox.selectionEnd - messageBox.selectionStart); // selected text will be replaced
+  if (pastedText.length > spaceLeft) {
+    event.preventDefault();
+    messageBox.setRangeText(pastedText.slice(0, Math.max(spaceLeft, 0)), messageBox.selectionStart,
+      messageBox.selectionEnd, "end");
+    updateCounter();
+  }
+});
+
+// Safety net (e.g. drag-and-drop or mobile keyboards): hard-trim the value
+messageBox.addEventListener("input", () => {
+  if (messageBox.value.length > MAX_CHARACTERS) {
+    messageBox.value = messageBox.value.slice(0, MAX_CHARACTERS);
+  }
+  updateCounter();
+});
+
+// Reset clears the text and the counter state
+resetButton.addEventListener("click", () => {
+  messageBox.value = "";
+  updateCounter();
+  messageBox.focus();
+});
+
+updateCounter();
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Q7 - Mouse Logger</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    #trackingBox { position: relative; width: 400px; height: 400px; border: 2px solid #333;
+                   background: #f7f7f7; cursor: crosshair; overflow: hidden; }
+    .dot { position: absolute; width: 12px; height: 12px; background: red; border-radius: 50%;
+           pointer-events: none; }               /* dots must not block mouse events */
+    #coordinates { margin-top: 12px; font-family: monospace; font-size: 16px; }
+    #pathLog { font-family: monospace; color: #555; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <h2>Mouse Path &amp; Coordinates Logger</h2>
+  <div id="trackingBox"></div>
+  <div id="coordinates">Move the mouse inside the box</div>
+  <div id="pathLog"></div>
+  <p>Double-click inside the box to drop a red dot.</p>
+  <script>
+// Q7: Mouse path & coordinates logger
+
+const trackingBox = document.getElementById("trackingBox");
+const coordinatesDisplay = document.getElementById("coordinates");
+const pathLog = document.getElementById("pathLog");
+
+const DOT_SIZE = 12;
+const MAX_PATH_POINTS = 5;
+const recentPath = []; // the last few mouse positions
+
+trackingBox.addEventListener("mousemove", (event) => {
+  // clientX/clientY are relative to the browser window (viewport)
+  coordinatesDisplay.textContent = `clientX: ${event.clientX}, clientY: ${event.clientY}`;
+
+  // Keep a short history to show the mouse "path"
+  recentPath.push(`(${event.clientX}, ${event.clientY})`);
+  if (recentPath.length > MAX_PATH_POINTS) recentPath.shift();
+  pathLog.textContent = "Path: " + recentPath.join(" -> ");
+});
+
+trackingBox.addEventListener("mouseleave", () => {
+  coordinatesDisplay.textContent = "Mouse is outside the box";
+});
+
+trackingBox.addEventListener("dblclick", (event) => {
+  // The dot is positioned INSIDE the box, so convert window coordinates
+  // to box coordinates by subtracting the box's position on the page.
+  const boxPosition = trackingBox.getBoundingClientRect();
+  const xInsideBox = event.clientX - boxPosition.left;
+  const yInsideBox = event.clientY - boxPosition.top;
+
+  const dot = document.createElement("div");
+  dot.className = "dot";
+  // Subtract half the size so the dot's CENTER sits exactly on the click point
+  dot.style.left = `${xInsideBox - DOT_SIZE / 2}px`;
+  dot.style.top = `${yInsideBox - DOT_SIZE / 2}px`;
+  trackingBox.appendChild(dot);
+});
+
+  </script>
+</body>
+</html>

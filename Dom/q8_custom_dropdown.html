@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Q8 - Custom Dropdown</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    .dropdown { position: relative; display: inline-block; width: 220px; }
+    #dropdownButton { width: 100%; padding: 10px; text-align: left; font-size: 16px; cursor: pointer;
+                      background: #fff; border: 1px solid #888; border-radius: 4px; }
+    #dropdownButton::after { content: "\25BE"; float: right; }
+    #dropdownList { position: absolute; top: 100%; left: 0; right: 0; margin: 4px 0 0; padding: 0;
+                    list-style: none; background: #fff; border: 1px solid #888; border-radius: 4px; z-index: 5; }
+    #dropdownList.hidden { display: none; }
+    #dropdownList li { padding: 10px; cursor: pointer; }
+    #dropdownList li:hover { background: #e6f0ff; }
+  </style>
+</head>
+<body>
+  <h2>Custom Dropdown</h2>
+  <div class="dropdown" id="dropdown">
+    <button type="button" id="dropdownButton">Select a language</button>
+    <ul id="dropdownList" class="hidden">
+      <li>JavaScript</li>
+      <li>Python</li>
+      <li>Java</li>
+      <li>C++</li>
+    </ul>
+  </div>
+  <script>
+// Q8: Custom dropdown (no <select>), closing via the CAPTURING phase
+
+const dropdown = document.getElementById("dropdown");
+const dropdownButton = document.getElementById("dropdownButton");
+const dropdownList = document.getElementById("dropdownList");
+
+function closeDropdown() {
+  dropdownList.classList.add("hidden");
+}
+
+// Button shows / hides the options
+dropdownButton.addEventListener("click", () => {
+  dropdownList.classList.toggle("hidden");
+});
+
+// Event delegation: clicking an option updates the button text and closes the list
+dropdownList.addEventListener("click", (event) => {
+  if (event.target.tagName === "LI") {
+    dropdownButton.textContent = event.target.textContent;
+    closeDropdown();
+  }
+});
+
+// CLOSE ON OUTSIDE CLICK using the capturing phase (third argument `true`).
+// Capturing listeners run on the way DOWN (document -> target), before any
+// bubbling handler. So the dropdown closes first, even if some other element's
+// handler calls stopPropagation() and would hide the click from a bubbling listener.
+document.addEventListener("click", (event) => {
+  if (!dropdown.contains(event.target)) {
+    closeDropdown();
+  }
+}, true);
+
+// Bonus: Escape key closes the list
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closeDropdown();
+});
+
+  </script>
+</body>
+</html>

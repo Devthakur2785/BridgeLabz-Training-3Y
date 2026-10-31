@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Q3 - Multi-Step Form</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 420px; margin: 40px auto; padding: 0 16px; }
+    .step { display: none; }
+    .step.active { display: block; }
+    label { display: block; margin-bottom: 6px; font-weight: bold; }
+    input { width: 100%; padding: 8px; font-size: 16px; box-sizing: border-box; }
+    .error { color: #d64545; min-height: 20px; font-size: 14px; margin-top: 4px; }
+    .buttons { display: flex; justify-content: space-between; margin-top: 16px; }
+    button { padding: 8px 16px; cursor: pointer; }
+    #progress { color: #555; margin-bottom: 12px; }
+    #summary { display: none; border: 1px solid #2d9d5c; background: #eefaf2; padding: 16px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <h2>Sign Up</h2>
+  <div id="progress"></div>
+
+  <form id="multiStepForm" novalidate>
+    <div class="step active">
+      <label for="nameInput">Name</label>
+      <input type="text" id="nameInput" placeholder="Your full name">
+      <div class="error"></div>
+    </div>
+    <div class="step">
+      <label for="emailInput">Email</label>
+      <input type="email" id="emailInput" placeholder="you@example.com">
+      <div class="error"></div>
+    </div>
+    <div class="step">
+      <label for="passwordInput">Password</label>
+      <input type="password" id="passwordInput" placeholder="At least 6 characters">
+      <div class="error"></div>
+    </div>
+
+    <div class="buttons">
+      <button type="button" id="backButton">Back</button>
+      <button type="submit" id="nextButton">Next</button>
+    </div>
+  </form>
+
+  <div id="summary"></div>
+  <script>
+// Q3: Multi-Step Form with Next/Back and validation
+
+const form = document.getElementById("multiStepForm");
+const steps = document.querySelectorAll(".step");
+const backButton = document.getElementById("backButton");
+const nextButton = document.getElementById("nextButton");
+const progressText = document.getElementById("progress");
+const summaryBox = document.getElementById("summary");
+
+const nameInput = document.getElementById("nameInput");
+const emailInput = document.getElementById("emailInput");
+const passwordInput = document.getElementById("passwordInput");
+
+let currentStepIndex = 0;
+
+// One validator per step. Each returns an error message, or "" when valid.
+const stepValidators = [
+  () => (nameInput.value.trim().length >= 2 ? "" : "Please enter your name (at least 2 characters)."),
+  () => (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim()) ? "" : "Please enter a valid email address."),
+  () => (passwordInput.value.length >= 6 ? "" : "Password must be at least 6 characters.")
+];
+
+// Show only the current step and update buttons / progress text
+function showStep(index) {
+  steps.forEach((step, stepIndex) => {
+    step.classList.toggle("active", stepIndex === index);
+  });
+  progressText.textContent = `Step ${index + 1} of ${steps.length}`;
+  backButton.style.visibility = index === 0 ? "hidden" : "visible"; // no Back on step 1
+  nextButton.textContent = index === steps.length - 1 ? "Submit" : "Next";
+  steps[index].querySelector("input").focus();
+}
+
+// Validate the current step and display its error (if any)
+function validateCurrentStep() {
+  const errorMessage = stepValidators[currentStepIndex]();
+  steps[currentStepIndex].querySelector(".error").textContent = errorMessage;
+  return errorMessage === "";
+}
+
+function showSummary() {
+  form.style.display = "none";
+  progressText.textContent = "All steps completed!";
+  summaryBox.style.display = "block";
+  summaryBox.innerHTML = ""; // clear before rebuilding
+
+  const heading = document.createElement("h3");
+  heading.textContent = "Summary";
+  const nameLine = document.createElement("p");
+  nameLine.textContent = `Name: ${nameInput.value.trim()}`;
+  const emailLine = document.createElement("p");
+  emailLine.textContent = `Email: ${emailInput.value.trim()}`;
+  const passwordLine = document.createElement("p");
+  passwordLine.textContent = `Password: ${"*".repeat(passwordInput.value.length)}`; // never show real password
+
+  const restartButton = document.createElement("button");
+  restartButton.textContent = "Start over";
+  restartButton.addEventListener("click", () => {
+    form.reset();
+    summaryBox.style.display = "none";
+    form.style.display = "block";
+    currentStepIndex = 0;
+    showStep(0);
+  });
+
+  summaryBox.append(heading, nameLine, emailLine, passwordLine, restartButton);
+}
+
+// "Next" is the submit button, so pressing Enter also moves forward
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  if (!validateCurrentStep()) return;     // stay on this step when invalid
+
+  if (currentStepIndex < steps.length - 1) {
+    currentStepIndex++;
+    showStep(currentStepIndex);
+  } else {
+    showSummary();                        // last step valid -> done
+  }
+});
+
+backButton.addEventListener("click", () => {
+  if (currentStepIndex > 0) {
+    currentStepIndex--;
+    showStep(currentStepIndex);
+  }
+});
+
+showStep(0);
+
+  </script>
+</body>
+</html>

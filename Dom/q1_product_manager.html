@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Q1 - Product List Manager</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 520px; margin: 40px auto; padding: 0 16px; }
+    .add-row { display: flex; gap: 8px; margin-bottom: 16px; }
+    input[type="text"] { flex: 1; padding: 8px; font-size: 16px; }
+    button { padding: 8px 14px; cursor: pointer; border: none; border-radius: 4px; background: #2d6cdf; color: #fff; }
+    button[data-action="delete"] { background: #d64545; }
+    ul { list-style: none; padding: 0; }
+    .product-item { display: flex; justify-content: space-between; align-items: center; gap: 8px;
+                    padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 8px; }
+    .product-item.editing { border-color: #2d6cdf; background: #f0f6ff; }
+    .edit-input { flex: 1; }
+    .actions { display: flex; gap: 6px; }
+    #emptyMessage { color: #777; }
+  </style>
+</head>
+<body>
+  <h2>Product List Manager</h2>
+  <div class="add-row">
+    <input type="text" id="productInput" placeholder="Enter product name">
+    <button id="addButton">Add</button>
+  </div>
+  <p id="emptyMessage">No products yet.</p>
+  <ul id="productList"></ul>
+  <script>
+// Q1: Dynamic Product List Manager (Add / Edit / Delete with event delegation)
+
+const productInput = document.getElementById("productInput");
+const addButton = document.getElementById("addButton");
+const productList = document.getElementById("productList");
+const emptyMessage = document.getElementById("emptyMessage");
+
+// Tracks which <li> is currently in edit mode (null when none)
+let currentlyEditingItem = null;
+
+// Show/hide the "No products yet." message
+function updateEmptyMessage() {
+  emptyMessage.style.display = productList.children.length === 0 ? "block" : "none";
+}
+
+// Builds one <li> with a name and Edit/Delete buttons
+function createProductItem(productName) {
+  const listItem = document.createElement("li");
+  listItem.className = "product-item";
+
+  const nameSpan = document.createElement("span");
+  nameSpan.className = "product-name";
+  nameSpan.textContent = productName; // textContent avoids HTML injection
+
+  const actions = document.createElement("div");
+  actions.className = "actions";
+
+  const editButton = document.createElement("button");
+  editButton.textContent = "Edit";
+  editButton.dataset.action = "edit";   // event delegation reads this attribute
+
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "Delete";
+  deleteButton.dataset.action = "delete";
+
+  actions.append(editButton, deleteButton);
+  listItem.append(nameSpan, actions);
+  return listItem;
+}
+
+function addProduct() {
+  const productName = productInput.value.trim();
+  if (productName === "") return;          // ignore empty input
+  productList.appendChild(createProductItem(productName));
+  productInput.value = "";
+  productInput.focus();
+  updateEmptyMessage();
+}
+
+// Switch an item into edit mode: replace the name text with an <input>
+function startEditing(listItem) {
+  // Only one item may be edited at a time: auto-save the previous one
+  if (currentlyEditingItem && currentlyEditingItem !== listItem) {
+    saveEditing(currentlyEditingItem);
+  }
+
+  const nameSpan = listItem.querySelector(".product-name");
+  const editInput = document.createElement("input");
+  editInput.type = "text";
+  editInput.className = "edit-input";
+  editInput.value = nameSpan.textContent;
+  editInput.dataset.original = nameSpan.textContent; // used to restore on cancel / empty value
+
+  nameSpan.replaceWith(editInput);
+  listItem.classList.add("editing");
+  listItem.querySelector('[data-action="edit"]').textContent = "Save";
+
+  currentlyEditingItem = listItem;
+  editInput.focus();
+  editInput.select();
+}
+
+// Leave edit mode and keep the new text (falls back to old text if empty)
+function saveEditing(listItem, cancel = false) {
+  const editInput = listItem.querySelector(".edit-input");
+  if (!editInput) return;
+
+  const newName = editInput.value.trim();
+  const nameSpan = document.createElement("span");
+  nameSpan.className = "product-name";
+  nameSpan.textContent = cancel || newName === "" ? editInput.dataset.original : newName;
+
+  editInput.replaceWith(nameSpan);
+  listItem.classList.remove("editing");
+  listItem.querySelector('[data-action="edit"]').textContent = "Edit";
+
+  if (currentlyEditingItem === listItem) currentlyEditingItem = null;
+}
+
+// EVENT DELEGATION: one listener on the parent <ul> handles every present and
+// future Edit/Delete button, because click events bubble up from the button.
+productList.addEventListener("click", (event) => {
+  const clickedButton = event.target.closest("button[data-action]");
+  if (!clickedButton) return;                       // click was not on a button
+
+  const listItem = clickedButton.closest("li");
+  const action = clickedButton.dataset.action;
+
+  if (action === "delete") {
+    if (listItem === currentlyEditingItem) currentlyEditingItem = null;
+    listItem.remove();
+    updateEmptyMessage();
+  } else if (action === "edit") {
+    // The same button toggles between "Edit" and "Save"
+    if (listItem.classList.contains("editing")) saveEditing(listItem);
+    else startEditing(listItem);
+  }
+});
+
+// Enter saves, Escape cancels while typing in the inline editor
+productList.addEventListener("keydown", (event) => {
+  if (!event.target.classList.contains("edit-input")) return;
+  const listItem = event.target.closest("li");
+  if (event.key === "Enter") saveEditing(listItem);
+  if (event.key === "Escape") saveEditing(listItem, true);
+});
+
+// AUTO-SAVE: a click anywhere outside the item being edited saves it.
+// (Clicking Edit on another item is handled above, so it is "inside" by then.)
+document.addEventListener("click", (event) => {
+  if (currentlyEditingItem && !currentlyEditingItem.contains(event.target)) {
+    saveEditing(currentlyEditingItem);
+  }
+});
+
+addButton.addEventListener("click", addProduct);
+productInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") addProduct();
+});
+
+updateEmptyMessage();
+
+  </script>
+</body>
+</html>

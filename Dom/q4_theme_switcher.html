@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Q4 - Theme Switcher</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 40px 16px; min-height: 100vh;
+           transition: background 0.3s, color 0.3s; }
+    .container { max-width: 520px; margin: 0 auto; }
+    button { padding: 8px 16px; margin-right: 8px; cursor: pointer; border: 2px solid transparent; border-radius: 4px; }
+    button[aria-pressed="true"] { border-color: currentColor; font-weight: bold; }
+
+    /* Each theme is a class added to <body> */
+    body.theme-light { background: #ffffff; color: #222222; }
+    body.theme-dark  { background: #1e1e1e; color: #f1f1f1; }
+    body.theme-blue  { background: #d9ecff; color: #0b3d6e; }
+
+    /* The data-theme attribute can be styled too */
+    body[data-theme="dark"] .card { background: #2c2c2c; }
+    body[data-theme="blue"] .card { background: #ffffff; }
+    .card { background: #f4f4f4; padding: 16px; border-radius: 8px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Theme Switcher</h2>
+    <button data-theme-choice="light">Light</button>
+    <button data-theme-choice="dark">Dark</button>
+    <button data-theme-choice="blue">Blue</button>
+    <div class="card">
+      <p>Current theme: <strong id="themeName"></strong></p>
+      <p>Open DevTools and inspect &lt;body&gt; to see the class and data-theme attribute.</p>
+    </div>
+  </div>
+  <script>
+// Q4: Theme switcher using attribute manipulation (setAttribute only)
+
+const themeButtons = document.querySelectorAll("[data-theme-choice]");
+const themeNameLabel = document.getElementById("themeName");
+
+function applyTheme(themeName) {
+  // 1. Add the theme class to <body> using setAttribute.
+  //    NOTE: setAttribute("class", ...) REPLACES all classes, which also removes the old theme.
+  document.body.setAttribute("class", `theme-${themeName}`);
+
+  // 2. Save the current theme in a custom attribute: <body data-theme="dark">
+  document.body.setAttribute("data-theme", themeName);
+
+  // 3. Mark the active button (also set with setAttribute)
+  themeButtons.forEach((button) => {
+    const isActive = button.getAttribute("data-theme-choice") === themeName;
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+
+  themeNameLabel.textContent = themeName;
+}
+
+themeButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    applyTheme(button.getAttribute("data-theme-choice"));
+  });
+});
+
+applyTheme("light"); // default theme
+
+  </script>
+</body>
+</html>
